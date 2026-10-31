@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Minha Primeira Loja</title>
+    
+    <style>
+        /* Estilo geral da página */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Conteúdo principal */
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        /* Cada produto */
+        .produto {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        /* Botão */
+        button {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #219653;
+        }
+
+        /* Carrinho */
+        #carrinho {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <h1>🛒 Minha Primeira Loja</h1>
+        <p>Bem-vindo! Aqui estão nossos produtos</p>
+    </header>
+
+    <!-- Conteúdo -->
+    <main>
+        <h2>Nossos Produtos</h2>
+
+        <!-- Produto 1 -->
+        <div class="produto">
+            <h3>📦 Caderno</h3>
+            <p>Um caderno bonito e prático</p>
+            <p><strong>Preço: R$ 15,90</strong></p>
+            <button onclick="adicionar('Caderno', 15.90)">Adicionar ao Carrinho</button>
+        </div>
+
+        <!-- Produto 2 -->
+        <div class="produto">
+            <h3>✏️ Caneta</h3>
+            <p>Caneta que escreve bem</p>
+            <p><strong>Preço: R$ 3,50</strong></p>
+            <button onclick="adicionar('Caneta', 3.50)">Adicionar ao Carrinho</button>
+        </div>
+
+        <!-- Produto 3 -->
+        <div class="produto">
+            <h3>📖 Régua</h3>
+            <p>Régua de 30cm</p>
+            <p><strong>Preço: R$ 5,00</strong></p>
+            <button onclick="adicionar('Régua', 5.00)">Adicionar ao Carrinho</button>
+        </div>
+
+        <!-- Produto 4 -->
+        <div class="produto">
+            <h3>🎁 Lápis de Cor</h3>
+            <p>Caixa com 12 cores</p>
+            <p><strong>Preço: R$ 12,00</strong></p>
+            <button onclick="adicionar('Lápis de Cor', 12.00)">Adicionar ao Carrinho</button>
+        </div>
+
+        <!-- Carrinho de Compras -->
+        <div id="carrinho">
+            <h2>🛒 Meu Carrinho</h2>
+            <div id="itens-carrinho">
+                <p>Carrinho vazio</p>
+            </div>
+            <p><strong>Total: R$ <span id="total">0,00</span></strong></p>
+            <button onclick="limparCarrinho()">Limpar Carrinho</button>
+        </div>
+    </main>
+
+    <script>
+        // Lista que guarda os itens do carrinho
+        let itens = [];
+        let total = 0;
+
+        // Função para adicionar produto
+        function adicionar(nome, preco) {
+            itens.push({ nome: nome, preco: preco });
+            total = total + preco;
+            atualizarCarrinho();
+            alert(nome + ' foi adicionado! ✅');
+        }
+
+        // Função para atualizar a tela do carrinho
+        function atualizarCarrinho() {
+            const lista = document.getElementById('itens-carrinho');
+            
+            if (itens.length === 0) {
+                lista.innerHTML = '<p>Carrinho vazio</p>';
+            } else {
+                lista.innerHTML = '';
+                for (let i = 0; i < itens.length; i++) {
+                    lista.innerHTML += '<p>' + itens[i].nome + ' - R$ ' + itens[i].preco.toFixed(2) + '</p>';
+                }
+            }
+
+            document.getElementById('total').textContent = total.toFixed(2);
+        }
+
+        // Função para limpar o carrinho
+        function limparCarrinho() {
+            itens = [];
+            total = 0;
+            atualizarCarrinho();
+        }
+    </script>
+
+</body>
+</html>
